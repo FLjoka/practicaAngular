@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  flex-direction: column;
+  margin: 3% 10%;
+  height: 80%;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.content {
+  font-size: 1.3rem;
+  padding: 1.5rem 0;
+}

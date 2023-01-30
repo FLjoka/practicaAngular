@@ -1,0 +1,76 @@
+<div class="container">
+  <form class="item form" #checkoutForm="ngForm">
+    <mat-form-field class="form-element">
+      <input
+        type="text"
+        matInput
+        placeholder="Nombre"
+        required
+        [(ngModel)]="model.name"
+        name="name"
+        #name="ngModel"
+      />
+      <mat-error *ngIf="!name.valid || name.pristine"
+        >El campo nombre es obligatorio</mat-error
+      >
+    </mat-form-field>
+    {{ isDelivery }} - isDelivery?
+    <mat-radio-group class="form-element">
+      <p>Eliga una opcion de compra</p>
+      <mat-radio-button
+        class="radio-btn"
+        value="Pickup"
+        (change)="onPickUpOrDelivery(false)"
+        >Recoger en tienda</mat-radio-button
+      >
+      <mat-radio-button
+        value="delivery"
+        (change)="onPickUpOrDelivery(true)"
+        checked=""
+        >Envio</mat-radio-button
+      >
+    </mat-radio-group>
+    <ng-container *ngIf="isDelivery; else showstore">
+      <mat-form-field class="form-element">
+        <input
+          matInput
+          placeholder="Dirección"
+          [(ngModel)]="model.shippingAdress"
+          name="shippingAdress"
+          #shippingAdress="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field class="form-element">
+        <input
+          matInput
+          placeholder="Ciudad"
+          [(ngModel)]="model.city"
+          name="city"
+          #city="ngModel"
+        />
+      </mat-form-field>
+    </ng-container>
+    <ng-template #showstore>
+      <mat-form-field class="form-element">
+        <mat-label>Seleccione el local</mat-label>
+        <mat-select name="store" #store="ngModel" [(ngModel)]="model.store">
+          <mat-option [value]="tienda" *ngFor="let tienda of stores">
+            {{ tienda.name }} - {{ tienda.openingHours }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-template>
+  </form>
+</div>
+<app-details></app-details>
+<div class="button-container">
+  <button
+    [disabled]="!checkoutForm.form.valid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    (click)="onSubmit(checkoutForm)"
+  >
+    Checkout
+  </button>
+</div>

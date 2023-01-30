@@ -1,0 +1,11 @@
+.spacer {
+  flex: 1 1 auto;
+}
+a {
+  text-decoration: none;
+  color: antiquewhite;
+}
+
+app-cart:hover {
+  cursor: pointer;
+}
